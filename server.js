@@ -1,5 +1,5 @@
-var express = require('express')
-var jwt = require('jsonwebtoken')
+const express = require('express')
+const jwt = require('jsonwebtoken')
 
 const app = express()
 
@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 app.get('/dashboard', verifyToken, (req, res) => {
   // Do we want to do this async or not?
   // eslint-disable-next-line no-unused-expressions
-  jwt.verify(req.token, 'the_secret_key'), (err, authData) => {
+  jwt.verify((req.token, 'the_secret_key'), (err, authData) => {
     if (err) {
       res.sendStatus(403)
     } else {
@@ -21,7 +21,7 @@ app.get('/dashboard', verifyToken, (req, res) => {
         authData
       })
     }
-  }
+  })
 })
 
 app.post('/login', (req, res) => {
