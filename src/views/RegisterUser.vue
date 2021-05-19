@@ -14,13 +14,17 @@
         Password:
       </label>
       <input v-model="password" type="password" name value>
-      <p v-if="status === 400">
-        Please enter different info.
-      </p>
 
       <button type="submit" name="button">
         Register
       </button>
+
+      <ul>
+        <li v-for="(error, index) in errors" :key="index">
+          {{ error }}
+        </li>
+      </ul>
+
       <router-link to="/login">
         Already have an account? Login.
       </router-link>
@@ -35,7 +39,8 @@ export default {
       name: '',
       email: '',
       password: '',
-      status: null
+      status: null,
+      errors: null
     }
   },
   methods: {
@@ -47,6 +52,8 @@ export default {
       })
         .then(() => {
           this.$router.push({ name: 'dashboard' })
+        }).catch(err => {
+          this.errors = err.response.data.errors
         })
     }
   }
