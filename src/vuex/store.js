@@ -15,6 +15,13 @@ export default new Vuex.Store({
       axios.defaults.headers.common['Authorization'] = `Bearer ${
         userData.token
       }`
+    },
+    CLEAR_USER_DATA () {
+      localStorage.removeItem('user')
+      // just reload page and resets all the data for us
+      // bc when our app growth, it will have lots of modules & states, it makes our code too complex
+      // so reload is the best solution to avoid all that problems
+      location.reload()
     }
   },
   actions: {
@@ -31,6 +38,9 @@ export default new Vuex.Store({
         .then(({ data }) => {
           commit('SET_USER_DATA', data)
         })
+    },
+    logout ({ commit }) {
+      commit('CLEAR_USER_DATA')
     }
   },
   getters: {
