@@ -90,7 +90,7 @@ app.post('/login', (req, res) => {
       name: userInfo.name
     })
   } else {
-    res.sendStatus(401)
+    res.sendStatus(401).json({ error: 'Invalid login. Please try again' })
   }
 })
 
