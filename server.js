@@ -39,13 +39,29 @@ app.post('/register', (req, res) => {
 
     const data = JSON.stringify(user, null, 2)
 
-    fs.writeFile('db/user.json', data, err => {
-      if (err) {
-        console.log(err)
-      } else {
-        console.log('Added user to user.json')
-      }
-    })
+    const dbUserEmail = require('./db/user.json').email
+    const errorsToSend = []
+
+    if (dbUserEmail === user.email) {
+      errorsToSend.push('An account with this email is already exist')
+    }
+
+    if (user.password.length < 5) {
+      errorsToSend.push('The password is too short: less than 5 symbols')
+    }
+
+    if (errorsToSend.length > 0) {
+      res.status(400).json({ errors: errorsToSend })
+    } else {
+      fs.writeFile('db/user.json', data, err => {
+        if (err) {
+          console.log(err)
+        } else {
+          console.log('Added user to user.json')
+        }
+      })
+    }
+
     // The secret key should be an evironment variable in a live app
     const token = jwt.sign({ user }, 'the_secret_key')
     res.json({
