@@ -1,35 +1,12 @@
-# authentication_course
+# authentication_vue
 
-## Project setup
+## О проекте 
 
-```
-npm install
-```
+Этот проект я делала в рамках курса Vue Mastery: Token Based Authentication.
 
-### Compiles and hot-reloads for development & starts backend server
+## Что я вынесла из курса: 
 
-```
-npm run start
-```
-
-### Compiles and minifies for production
-
-```
-npm run build
-```
-
-### Run your tests
-
-```
-npm run test
-```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- узнала о [JWT](https://jwt.io/introduction/): что это, из чего состоит
+- узнала о шагах аутентификации, применила их в проекте
+- научилась описывать ошибки "на стороне сервера" и отображать сообщения об ошибке
+- научилась использовать vuex и axios для "умного" логина и логаута: после рефреша страницы ты остаешься залогинненым, токен удаляется после логаута и тд
